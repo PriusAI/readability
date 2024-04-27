@@ -1358,7 +1358,7 @@ Readability.prototype = {
         parentOfTopCandidate = topCandidate.parentNode;
         var lastScore = topCandidate.readability.contentScore;
         // The scores shouldn't get too low.
-        var scoreThreshold = lastScore / 3;
+        var scoreThreshold = lastScore / 5;
         while (parentOfTopCandidate.tagName !== "BODY") {
           if (!parentOfTopCandidate.readability) {
             parentOfTopCandidate = parentOfTopCandidate.parentNode;

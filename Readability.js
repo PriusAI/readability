@@ -1101,7 +1101,9 @@ Readability.prototype = {
             !this._hasAncestorTag(node, "table") &&
             !this._hasAncestorTag(node, "code") &&
             node.tagName !== "BODY" &&
-            node.tagName !== "A"
+            node.tagName !== "A" &&
+            node.tagName !== "HEADER" &&
+            !["H1", "H2", "H3", "H4", "H5", "H6"].includes(node.tagName)
           ) {
             this.log("Removing unlikely candidate - " + matchString);
             node = this._removeAndGetNext(node);

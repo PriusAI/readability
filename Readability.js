@@ -2659,7 +2659,14 @@ Readability.prototype = {
         node.getAttribute("aria-hidden") != "true" ||
         (node.className &&
           node.className.includes &&
-          node.className.includes("fallback-image")))
+          node.className.includes("fallback-image"))) ||
+      // For weixin page, the content is wrapped in a div with id js_content and class "rich_media_content".
+      // When the page is not fully loaded it invisiable.
+      (node.id == "js_content" ||
+        (node.className &&
+          node.className.includes &&
+          node.className.includes("rich_media_content") &&
+          node.className.includes("js_underline_content")))
     );
   },
 

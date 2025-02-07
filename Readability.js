@@ -2457,6 +2457,28 @@ Readability.prototype = {
           list => (listLength += this._getInnerText(list).length)
         );
         isList = listLength / this._getInnerText(node).length > 0.9;
+      } else {
+        let hasValidContent = false;
+        this._forEachNode(node.getElementsByTagName('li'), function(li) {
+          let text = this._getInnerText(li, true).trim();
+          if (text.length > 20) { 
+            hasValidContent = true;
+          }
+          
+          // 检查 li 内是否有 section 和有效文本
+          let sections = li.getElementsByTagName('section');
+          if (sections.length > 0) {
+            for (let section of sections) {
+              if (this._getInnerText(section, true).trim().length > 0) {
+                hasValidContent = true;
+              }
+            }
+          }
+        });
+        
+        if (hasValidContent) {
+          return false; // 不删除包含有效内容的列表
+        }
       }
 
       if (tag === "table" && isDataTable(node)) {
